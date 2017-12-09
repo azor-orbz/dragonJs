@@ -1,0 +1,28 @@
+{
+  "name": "dragonjs",
+  "version": "0.0.1",
+  "description": "A javascript text game about dragons to lear Javascript and NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "testIt.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azor-orbz/dragonJs.git"
+  },
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "learning",
+    "text",
+    "game",
+    "node",
+    "certification"
+  ],
+  "author": "Vaclav Kozak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azor-orbz/dragonJs/issues"
+  },
+  "homepage": "https://github.com/azor-orbz/dragonJs#readme"
+}
