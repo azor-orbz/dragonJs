@@ -1,6 +1,7 @@
 var readline = require('readline');
 
 var questions = new Map();
+let question_temp = new Question();
 
 let actual_stage = 0;
 let _MAIN_MENU = -1;
@@ -9,6 +10,10 @@ let _STAGE_QUESTION_TEXT = 2;
 let _STAGE_QUESTION_TOPICS = 3;
 let _STAGE_QUESTION_DIFFICULTY = 4;
 let _STAGE_QUESTION_STAGE = 5;
+let _STAGE_QUESTION_ADDING_ANSWERS = 6;
+let _STAGE_QUESTION_ADDING_ANSWERS_CORRECT = 7;
+let _STAGE_QUESTION_ADDING_ANSWERS_ANOTHER = 8;
+let _STAGE_MAIN_MENU = 99999;
 let _MAIN_MENU_QUESTION = "What do you want to do: ";
 
 
@@ -81,7 +86,59 @@ function printMenuTopicContinue() {
         line = ` ${i.idAction} (command: ${i.actionCommand}) :  ${i.text}  `;
         console.log(line);
     }
+}
 
+let menuCorretness = [
+    {
+        idAction: 1,
+        text: 'This answer is correct',
+        actionCommand: "1",
+        action: function (a) {
+            defineQuestionStage9(a);
+        }
+    }, {
+        idAction: 3,
+        text: 'This answer is incorrect',
+        actionCommand: "2",
+        action: function (a) {
+            defineQuestionStage9(a);
+        }
+    }
+];
+
+
+function printMenuCorectness() {
+    let line = "";
+    for (i of menuCorretness) {
+        line = ` ${i.idAction} (command: ${i.actionCommand}) :  ${i.text}  `;
+        console.log(line);
+    }
+}
+
+let menuAnotherAnswer = [
+    {
+        idAction: 1,
+        text: 'Do you wish to add another answer?',
+        actionCommand: "1",
+        action: function (a) {
+            defineQuestionStage9(a);
+        }
+    }, {
+        idAction: 3,
+        text: 'Continue',
+        actionCommand: "2",
+        action: function (a) {
+            defineQuestionStage9(a);
+        }
+    }
+];
+
+function prinMenuAnotherAnswer() {
+    let line = "";
+    for (i of menuAnotherAnswer) {
+        line = ` ${i.idAction} (command: ${i.actionCommand}) :  ${i.text}  `;
+        console.log(line);
+    }
 }
 
 function printMenu() {
@@ -104,8 +161,13 @@ function printStats() {
 }
 
 console.log("The game has started");
-printMenu();
-ask(_MAIN_MENU_QUESTION);
+defineQuestionStageStart();
+
+function defineQuestionStageStart() {
+    printMenu();
+    ask(_MAIN_MENU_QUESTION);
+}
+
 
 function ask(lquestion, call) {
     rl.question(lquestion, function (a) {
@@ -139,6 +201,8 @@ function evaluateDecision(answer) {
 
 rl.on('line', function (a) {
     switch (actual_stage) {
+        case _STAGE_MAIN_MENU:
+            defineQuestionStageStart(a);
         case _STAGE_QUESTION_NAME:
             defineQuestionStage2(a);
             break;
@@ -156,6 +220,9 @@ rl.on('line', function (a) {
             break;
         case _STAGE_QUESTION_STAGE:
             defineQuestionStage6(a);
+            break;
+        case _STAGE_QUESTION_ADDING_ANSWERS_CORRECT:
+            defineQuestionStage8(a);
             break;
         default:
             console.log("Missing action for:" + actual_stage);
@@ -193,12 +260,43 @@ function defineQuestionStage4(a) {
     }
 
 }
-function defineQuestionStage5(a) {
-    let q = "What is the difficulties of the question? (1-9)";
-    actual_stage = _STAGE_QUESTION_STAGE;
-    ask("Topics:", defineQuestionStage6);
-}
-function defineQuestionStage6(a) {
-    new Error("TODO");
 
+function defineQuestionStage5(a) {
+    let q = "What is the difficulties of the question? (1-9): ";
+    actual_stage = _STAGE_QUESTION_STAGE;
+    ask(q, defineQuestionStage6);
+}
+
+function defineQuestionStage6(a) {
+    let q = "Please fill the stage of the game (1-5): ";
+    actual_stage = _STAGE_QUESTION_ADDING_ANSWERS;
+    ask(q, defineQuestionStage7);
+
+}
+
+function defineQuestionStage7(a) {
+    let q = "Please write the answer: ";
+    actual_stage = _STAGE_QUESTION_ADDING_ANSWERS_CORRECT;
+    ask(q, defineQuestionStage8);
+}
+
+function defineQuestionStage8(a) {
+    printMenuCorectness();
+    let q = "Is this answer correct?: ";
+    actual_stage = _STAGE_QUESTION_ADDING_ANSWERS_ANOTHER;
+    ask(q, defineQuestionStage9);
+}
+
+function defineQuestionStage9(a) {
+    prinMenuAnotherAnswer();
+    let q = ":";
+    actual_stage = _STAGE_MAIN_MENU;
+    ask(q, defineQuestionStageStart2);
+}
+
+function defineQuestionStage10(a) {
+    console.log();
+    let q = "Question has been added.";
+    actual_stage = _STAGE_MAIN_MENU;
+    ask(q, defineQuestionStage9);
 }
