@@ -11,7 +11,7 @@
  # CORE
  - const - konstanty jsou až od EMCA6
  - rest parameter - parametr, který je naposledním místě s ...a a můžu k něm přistupovat jako k poli
- - desctrucion je možné provést s default hodnotou
+ - desctruction je možné provést s default hodnotou
  - function* je generator funkce
  - http://es6-features.org/#ArrayElementFinding
  - IIFE (Immediately-Invoked Function Expression - definice funkce za kterou je , tudíž() se rovnou spustí
@@ -30,5 +30,8 @@
   - process.exit - když node končí a nelze s tím již nic udělat, pouze synchornní volání
   - process.beforeExit - když je node u konce (ne však neodchycené vyjímky), klidně asynchornní volání a konec lze ještě odvrátit
   -'process.uncaughtException - eventa když probulají errory, defaultní chovnání je trace+exit node, lze přepsat nicméně je lepší když se zde vyčistí resource, zavřou file handlery atd. 
+  - cluster.fork() je funkce na to spustit to multithreadem
+  - EventEmiter pořaduje balik, ktery se jmenuje events, so require('events')
+  - Parsing Url požaduje require('url'), zparsovaný object se dá získat pomocí .parse nebo jako neový objet new Url
   
   # REACT-JS
