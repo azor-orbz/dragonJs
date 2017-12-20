@@ -21,6 +21,8 @@
  - var is function scoped, let is block scoped
  - 'sss'.repeat() opakauje string
  - Symbol je primitivní typ
+ - existuje operator in, ktery vraci true/false pokud ne/existuje vlastnos objektu ('name' in person) vrati true, vraci true i pro undefined property, i pro inherited property
+ - hasOwnProperty vraci true/false, nehleda v inherited property
  
   # NODE
   - Timers je package ve kterém je volání setImmediate(), require není potřeba
