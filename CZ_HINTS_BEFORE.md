@@ -8,6 +8,7 @@
 - npm package nezbytně nutně nemusí být modul. Package je něco, co se dá naloadovat pomocí require
 - npm ls -depth=0 - listuje depdendecies hloubky 0
 - npm run-script vylistuje scripty pokud je bez parametru
+- npm run-script env vylistuje proměnne prostředí, včetně node specific věcí
  
  # CORE
  - const - konstanty jsou až od EMCA6
@@ -36,5 +37,11 @@
   - Parsing Url požaduje require('url'), zparsovaný object se dá získat pomocí .parse nebo jako neový objet new Url
   - Assert testovani vyžaduje assert module
   - Assert vyhazuje ERR_ASSERATION - Asseration Error v případě nesplnění
+  - po práci s adresářovou strukturou require('path')
   
   # REACT-JS
+  
+  # WEBPACK
+  -Má 4 části - Input, Output, Loaders a Plugins
+  -Konfigurace je pomocí web.config.js
+  -
